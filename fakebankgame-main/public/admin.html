@@ -1,0 +1,126 @@
+<!-- =========================================================
+public/admin.html
+Interface administrateur
+========================================================= -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin - Banque RP</title>
+
+  <link rel="stylesheet" href="/css/style.css"/>
+  <link rel="stylesheet" href="/css/components.css"/>
+  <link rel="stylesheet" href="/css/dashboard.css"/>
+
+  <script src="/js/theme.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/admin.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+<div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <div class="sidebar-header">
+      <h2>Banque RP</h2>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="/dashboard.html">Dashboard</a>
+      <a href="/transfer.html">Virement</a>
+      <a href="/history.html">Historique</a>
+      <a href="/search.html">Recherche</a>
+      <a href="/employee.html">Employé</a>
+      <a href="/admin.html" class="active">Admin</a>
+      <a href="/profile.html">Profil</a>
+    </nav>
+
+    <button onclick="API.auth.logout().then(()=>location='/login.html')">
+      Déconnexion
+    </button>
+
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <h1>Administration</h1>
+      <button onclick="toggleTheme()">🌓</button>
+    </header>
+
+    <!-- CONTENT -->
+    <section class="page-content">
+
+      <!-- STATS -->
+      <div class="admin-stats">
+        <div class="stat-card" id="usersCount">Utilisateurs: 0</div>
+        <div class="stat-card" id="transactionsCount">Transactions: 0</div>
+        <div class="stat-card" id="balanceTotal">Total: 0 €</div>
+      </div>
+
+      <canvas id="adminChart"></canvas>
+
+      <!-- TABS -->
+      <div class="tabs">
+        <button class="tab active" data-tab="users">Utilisateurs</button>
+        <button class="tab" data-tab="transactions">Transactions</button>
+        <button class="tab" data-tab="logs">Journaux</button>
+        <button class="tab" data-tab="banks">Banques</button>
+      </div>
+
+      <!-- USERS -->
+      <div id="tab-users" class="tab-content">
+
+        <div class="table-wrapper">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Utilisateur</th>
+                <th>Email</th>
+                <th>Rôle</th>
+                <th>TPE</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="usersTable"></tbody>
+          </table>
+        </div>
+
+      </div>
+
+      <!-- TRANSACTIONS -->
+      <div id="tab-transactions" class="tab-content hidden">
+        <div id="transactionsAdmin"></div>
+      </div>
+
+      <!-- LOGS -->
+      <div id="tab-logs" class="tab-content hidden">
+        <div id="logsTable"></div>
+      </div>
+
+      <!-- BANKS -->
+      <div id="tab-banks" class="tab-content hidden">
+        <div id="banksList"></div>
+
+        <div class="form-group">
+          <input id="bankName" placeholder="Nom banque" />
+          <input id="bankCode" placeholder="Code" />
+          <button onclick="createBank()">Créer</button>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
+
+</body>
+</html>

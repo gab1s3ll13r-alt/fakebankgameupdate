@@ -1,0 +1,121 @@
+<!-- =========================================================
+public/employee.html
+Interface employé de banque
+========================================================= -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Employé - Banque RP</title>
+
+  <link rel="stylesheet" href="/css/style.css"/>
+  <link rel="stylesheet" href="/css/components.css"/>
+  <link rel="stylesheet" href="/css/dashboard.css"/>
+
+  <script src="/js/theme.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/employee.js"></script>
+</head>
+
+<body>
+
+<div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">🏦 Banque RP</div>
+
+    <nav class="sidebar-nav">
+      <a href="/dashboard.html">Dashboard</a>
+      <a href="/transfer.html">Virement</a>
+      <a href="/history.html">Historique</a>
+      <a href="/search.html">Recherche</a>
+      <a href="/employee.html" class="active">Employé</a>
+      <a href="/profile.html">Profil</a>
+    </nav>
+
+    <button onclick="API.auth.logout().then(()=>location='/login.html')">
+      Déconnexion
+    </button>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <h1>Interface Employé</h1>
+      <button onclick="toggleTheme()">🌓</button>
+    </header>
+
+    <!-- CONTENT -->
+    <section class="page-content">
+
+      <!-- TABS -->
+      <div class="tabs">
+        <button class="tab active" data-tab="accounts">Comptes</button>
+        <button class="tab" data-tab="requests">Demandes</button>
+      </div>
+
+      <!-- ACCOUNTS -->
+      <div id="tab-accounts" class="tab-content">
+
+        <div class="search-bar">
+          <input id="accountSearch" placeholder="Rechercher un compte..." />
+        </div>
+
+        <div class="table-wrapper">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Utilisateur</th>
+                <th>IBAN</th>
+                <th>Solde</th>
+                <th>Statut</th>
+              </tr>
+            </thead>
+            <tbody id="accountsTable"></tbody>
+          </table>
+        </div>
+
+        <div id="accountDetails" class="panel hidden"></div>
+
+      </div>
+
+      <!-- REQUESTS -->
+      <div id="tab-requests" class="tab-content hidden">
+
+        <div class="filter-bar">
+          <select id="requestStatus">
+            <option value="">Tous</option>
+            <option value="open">Ouvert</option>
+            <option value="resolved">Résolu</option>
+            <option value="rejected">Rejeté</option>
+          </select>
+        </div>
+
+        <div class="table-wrapper">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Utilisateur</th>
+                <th>Type</th>
+                <th>Statut</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody id="requestsTable"></tbody>
+          </table>
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
+
+</body>
+</html>
