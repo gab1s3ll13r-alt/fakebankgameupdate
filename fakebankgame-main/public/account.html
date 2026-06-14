@@ -1,0 +1,21 @@
+<h2>Profil</h2>
+
+<div id="profile"></div>
+
+<script type="module">
+import { AccountAPI } from "/assets/api.js";
+
+async function load() {
+  const data = await AccountAPI.profile();
+
+  document.getElementById("profile").innerHTML = `
+    <div class="card">
+      <p>Username: ${data.user.username}</p>
+      <p>Email: ${data.user.email}</p>
+      <p>Display: ${data.user.displayName}</p>
+    </div>
+  `;
+}
+
+load();
+</script>

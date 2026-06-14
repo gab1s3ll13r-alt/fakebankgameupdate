@@ -1,0 +1,80 @@
+<!-- =========================================================
+public/tpe-pay.html
+Page de paiement TPE (scan QR)
+========================================================= -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Paiement TPE - Banque RP</title>
+
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/components.css" />
+  <link rel="stylesheet" href="/css/auth.css" />
+
+  <script src="/js/theme.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/tpe.js"></script>
+</head>
+
+<body>
+
+<!-- TOP BAR SIMPLE -->
+<header class="topbar-simple">
+  <h1>Paiement TPE</h1>
+  <button onclick="toggleTheme()">🌓</button>
+</header>
+
+<!-- MAIN CARD -->
+<main class="auth-page">
+
+  <div class="auth-container">
+
+    <div class="auth-card">
+
+      <!-- LOADING -->
+      <div id="loadingState">
+        <p>Chargement du paiement...</p>
+      </div>
+
+      <!-- ERROR -->
+      <div id="errorState" style="display:none;">
+        <p id="errorText">QR invalide</p>
+      </div>
+
+      <!-- PAYMENT DETAILS -->
+      <div id="paymentCard" style="display:none;">
+
+        <h2>Validation du paiement</h2>
+
+        <div class="payment-info">
+          <p>Commerçant : <span id="merchantName"></span></p>
+          <p>Montant : <span id="amount"></span> €</p>
+          <p>Libellé : <span id="label"></span></p>
+        </div>
+
+        <div class="balance-info">
+          <p>Ton solde : <span id="userBalance"></span> €</p>
+        </div>
+
+        <button id="payBtn">
+          Payer maintenant
+        </button>
+
+      </div>
+
+      <!-- SUCCESS -->
+      <div id="successState" style="display:none;">
+        <h2>Paiement réussi ✓</h2>
+        <p>Transaction confirmée</p>
+      </div>
+
+    </div>
+
+  </div>
+
+</main>
+
+</body>
+</html>

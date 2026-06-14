@@ -1,0 +1,134 @@
+<!-- =========================================================
+public/tpe.html
+Interface TPE commerçant
+========================================================= -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TPE - Banque RP</title>
+
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/components.css" />
+  <link rel="stylesheet" href="/css/dashboard.css" />
+
+  <script src="/js/theme.js"></script>
+  <script src="/js/api.js"></script>
+  <script src="/js/dashboard.js"></script>
+  <script src="/js/tpe.js"></script>
+
+  <!-- QRCode lib -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+</head>
+
+<body>
+
+<div class="app-layout">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <div class="sidebar-header">
+      <h2>Banque RP</h2>
+      <p class="role-badge">Mode TPE</p>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="/dashboard.html">Dashboard</a>
+      <a href="/transfer.html">Virement</a>
+      <a href="/history.html">Historique</a>
+      <a href="/search.html">Recherche</a>
+      <a href="/tpe.html" class="active">TPE</a>
+      <a href="/profile.html">Profil</a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <button onclick="API.auth.logout().then(()=>location.href='/login.html')">
+        Déconnexion
+      </button>
+    </div>
+
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <!-- TOPBAR -->
+    <header class="topbar">
+      <h1>TPE Commerçant</h1>
+
+      <div class="topbar-actions">
+        <button onclick="toggleTheme()">🌓</button>
+      </div>
+    </header>
+
+    <!-- CONTENT -->
+    <section class="page-content">
+
+      <!-- TPE SCREEN -->
+      <div class="tpe-screen">
+
+        <!-- INFO COMMERCE -->
+        <div class="tpe-header">
+          <h2 id="tpeLabel">Commerce</h2>
+          <p>Solde: <span id="tpeBalance">0.00 €</span></p>
+        </div>
+
+        <!-- FORM -->
+        <div class="tpe-form">
+
+          <input 
+            type="number" 
+            id="amountInput"
+            placeholder="Montant €"
+            step="0.01"
+          />
+
+          <input 
+            type="text" 
+            id="labelInput"
+            placeholder="Libellé (optionnel)"
+          />
+
+          <button id="generateQrBtn">
+            Générer QR Code
+          </button>
+
+        </div>
+
+        <!-- QR DISPLAY -->
+        <div id="qrCard" class="qr-display-card" style="display:none;">
+          
+          <div id="qrCodeContainer"></div>
+
+          <p>Scannez ce QR pour payer</p>
+
+          <button id="cancelQrBtn">
+            Annuler
+          </button>
+
+        </div>
+
+        <!-- PENDING INFO -->
+        <div id="paymentStatus" class="payment-status"></div>
+
+      </div>
+
+      <!-- HISTORIQUE TPE -->
+      <div class="tpe-history">
+
+        <h3>Historique</h3>
+
+        <div id="tpeHistoryList"></div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
+
+</body>
+</html>
